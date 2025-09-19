@@ -5,7 +5,7 @@ import joblib
 # Load trained model
 model = joblib.load("models/model.pkl")
 
-st.title("🏡 Advanced House Price Predictor")
+st.title("🏡 Ghar Le Lo")
 st.markdown("Enter the house details to get an estimated price.") # Add this line
 
 # User inputs
