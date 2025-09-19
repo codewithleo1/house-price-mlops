@@ -26,6 +26,11 @@ jobs:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         run: python scripts/train.py
 
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }} # Add this token
+
       - name: Commit and push model
         run: |
           git config --global user.name 'github-actions[bot]'
