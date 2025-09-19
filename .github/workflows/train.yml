@@ -10,27 +10,29 @@ jobs:
   train:
     runs-on: ubuntu-latest
     steps:
+      # 1. Checkout the repository first and provide the token
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
 
+      # 2. Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
+      # 3. Install dependencies
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # 4. Run the training script with the Google secret
       - name: Run training script
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         run: python scripts/train.py
 
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PAT }} # Add this token
-
+      # 5. Commit and push the new model
       - name: Commit and push model
         run: |
           git config --global user.name 'github-actions[bot]'
