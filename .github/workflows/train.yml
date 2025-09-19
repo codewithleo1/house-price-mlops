@@ -30,6 +30,6 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add models/model.pkl
+          git add -f models/model.pkl
           git commit -m "Automated model retraining from Google Sheet" || echo "No changes to commit"
           git push
