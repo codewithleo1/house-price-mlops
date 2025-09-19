@@ -66,7 +66,7 @@ model.fit(X_train, y_train)
 
 # Evaluate
 y_pred = model.predict(X_test)
-rmse = mean_squared_error(y_test, y_pred, squared=False)
+rmse = mean_squared_error(y_test, y_pred)
 print(f"RMSE: {rmse:.2f}")
 
 # Save model
