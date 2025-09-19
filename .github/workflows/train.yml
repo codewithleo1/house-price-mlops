@@ -1,10 +1,10 @@
-name: Train and Commit Model
+name: Train and Commit Model from Google Sheet
 
 on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '0 0 * * 0'   # Retrain every Sunday at midnight UTC
+    - cron: '*/5 * * * *'   # This runs the job every 5 minutes
 
 jobs:
   train:
@@ -22,6 +22,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run training script
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         run: python scripts/train.py
 
       - name: Commit and push model
@@ -29,5 +31,5 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add models/model.pkl
-          git commit -m "Automated model retraining" || echo "No changes to commit"
+          git commit -m "Automated model retraining from Google Sheet" || echo "No changes to commit"
           git push

@@ -7,3 +7,5 @@ evidently==0.4.33
 pytest
 flake8
 xgboost
+gspread
+gspread-dataframe
